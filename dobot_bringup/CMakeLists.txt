@@ -54,6 +54,8 @@ add_service_files(
         EnableRobot.srv
         DisableRobot.srv
         ClearError.srv
+        StartDrag.srv
+        SetTerminal.srv
         ResetRobot.srv
         SpeedFactor.srv
         User.srv
@@ -74,7 +76,6 @@ add_service_files(
         Arch.srv
         CP.srv
         LimZ.srv
-        ModbusCreate.srv
         SetArmOrientation.srv
         PowerOn.srv
         RunScript.srv
@@ -82,6 +83,7 @@ add_service_files(
         PauseScript.srv
         ContinueScript.srv
         #GetHoldRegs.srv
+        ModbusCreate.srv
         SetHoldRegs.srv
         SetSafeSkin.srv
         SetObstacleAvoid.srv

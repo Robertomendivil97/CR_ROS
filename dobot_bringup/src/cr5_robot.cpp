@@ -42,6 +42,9 @@ void CR5Robot::init()
     server_tbl_.push_back(
         control_nh_.advertiseService("/dobot_bringup/srv/DisableRobot", &CR5Robot::disableRobot, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/ClearError", &CR5Robot::clearError, this));
+    server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/StartDrag", &CR5Robot::StartDrag, this));
+    //server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/ModbusCreate", &CR5Robot::ModbusCreate, this));
+    server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/SetTerminal", &CR5Robot::SetTerminal, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/ResetRobot", &CR5Robot::resetRobot, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/SpeedFactor", &CR5Robot::speedFactor, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/User", &CR5Robot::user, this));
@@ -258,6 +261,65 @@ bool CR5Robot::clearError(dobot_bringup::ClearError::Request& request, dobot_bri
         response.res = -1;
         return false;
     }
+}
+
+bool CR5Robot::StartDrag(dobot_bringup::StartDrag::Request& request, dobot_bringup::StartDrag::Response& response)
+{
+    try
+    {
+        const char* cmd = "StartDrag()";
+        commander_->dashboardDoCmd(cmd, response.res);
+        response.res = 0;
+        return true;
+    }
+    catch(const std::exception& err)
+    {
+        response.res = -1;
+        return false;
+    }
+}
+/*
+bool CR5Robot::ModbusCreate(dobot_bringup::ModbusCreate::Request& request, dobot_bringup::ModbusCreate::Response& response)
+{
+    try
+    {
+        char cmd[300];
+        std::vector<std::string> result;
+        snprintf(cmd, sizeof(cmd), "ModbusCreate(%s,%d,%d,%d)", request.ip.c_str(), request.port, request.slave_id,
+                 request.is_rtu);
+        cmd[sizeof(cmd) - 1] = 0;
+        commander_->dashboardDoCmd(cmd, response.res, result);
+        if (result.size() != 2)
+            throw std::logic_error("Haven't recv any result");
+
+        response.res = str2Int(result[0].c_str());
+        response.index = str2Int(result[1].c_str());
+        return true;
+    }
+    catch (const TcpClientException& err)
+    {
+        ROS_ERROR("%s", err.what());
+        response.res = -1;
+        return false;
+    }
+}
+*/
+
+bool CR5Robot::SetTerminal(dobot_bringup::SetTerminal::Request& request, dobot_bringup::SetTerminal::Response& response)
+{
+    try
+    {
+        char cmd[100];
+        sprintf(cmd, "SetTerminal(%d, 8, %d, 1)", request.baudRate, request.parity.c_str());
+        response.res = 0;
+        return true;
+    }
+    catch(const std::exception& err)
+    {
+        response.res = -1;
+        return false;
+    }
+    
 }
 
 bool CR5Robot::resetRobot(dobot_bringup::ResetRobot::Request& request, dobot_bringup::ResetRobot::Response& response)

@@ -19,6 +19,9 @@
 #include <dobot_bringup/EnableRobot.h>
 #include <dobot_bringup/DisableRobot.h>
 #include <dobot_bringup/ClearError.h>
+#include <dobot_bringup/StartDrag.h>
+//#include <dobot_bringup/ModbusCreate.h>
+#include <dobot_bringup/SetTerminal.h>
 #include <dobot_bringup/ResetRobot.h>
 #include <dobot_bringup/SpeedFactor.h>
 #include <dobot_bringup/User.h>
@@ -140,6 +143,9 @@ protected:
     bool enableRobot(dobot_bringup::EnableRobot::Request& request, dobot_bringup::EnableRobot::Response& response);
     bool disableRobot(dobot_bringup::DisableRobot::Request& request, dobot_bringup::DisableRobot::Response& response);
     bool clearError(dobot_bringup::ClearError::Request& request, dobot_bringup::ClearError::Response& response);
+    bool StartDrag(dobot_bringup::StartDrag::Request& request, dobot_bringup::StartDrag::Response& response);
+    //bool ModbusCreate(dobot_bringup::ModbusCreate::Request& request, dobot_bringup::ModbusCreate::Response& response);
+    bool SetTerminal(dobot_bringup::SetTerminal::Request& request, dobot_bringup::SetTerminal::Response& response);
     bool resetRobot(dobot_bringup::ResetRobot::Request& request, dobot_bringup::ResetRobot::Response& response);
     bool speedFactor(dobot_bringup::SpeedFactor::Request& request, dobot_bringup::SpeedFactor::Response& response);
     bool user(dobot_bringup::User::Request& request, dobot_bringup::User::Response& response);

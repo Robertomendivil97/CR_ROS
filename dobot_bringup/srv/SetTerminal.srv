@@ -1,0 +1,4 @@
+int32 baudRate
+string parity
+---
+int32 res
