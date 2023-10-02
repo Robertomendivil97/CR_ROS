@@ -82,7 +82,7 @@ add_service_files(
         StopScript.srv
         PauseScript.srv
         ContinueScript.srv
-        #GetHoldRegs.srv
+        GetHoldRegs.srv
         ModbusCreate.srv
         SetHoldRegs.srv
         SetSafeSkin.srv

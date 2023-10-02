@@ -97,7 +97,7 @@ void CR5Robot::init()
     server_tbl_.push_back(
         control_nh_.advertiseService("/dobot_bringup/srv/StartFCTrace", &CR5Robot::startFCTrace, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/MoveJog", &CR5Robot::moveJog, this));
-
+    server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/GetHoldRegs", &CR5Robot::getHoldRegs, this));
     server_tbl_.push_back(
         control_nh_.advertiseService("/dobot_bringup/srv/ModbusCreate", &CR5Robot::modbusCreate, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/SetHoldRegs", &CR5Robot::setHoldRegs, this));
@@ -310,7 +310,8 @@ bool CR5Robot::SetTerminal(dobot_bringup::SetTerminal::Request& request, dobot_b
     try
     {
         char cmd[100];
-        sprintf(cmd, "SetTerminal(%d, 8, %d, 1)", request.baudRate, request.parity.c_str());
+        snprintf(cmd, sizeof(cmd) ,"SetTerminal485(%d, 8, %s, 1)", request.baudRate, request.parity.c_str());
+        commander_->dashboardDoCmd(cmd, response.res);
         response.res = 0;
         return true;
     }
@@ -738,6 +739,35 @@ bool CR5Robot::pauseScript(dobot_bringup::PauseScript::Request& request, dobot_b
         response.res = -1;
         return false;
     }
+}
+
+bool CR5Robot::getHoldRegs(dobot_bringup::GetHoldRegs::Request& request, dobot_bringup::GetHoldRegs::Response& response)
+{
+    try
+    {
+        char cmd[300];
+        std::vector<std::string> result;
+        snprintf(cmd, sizeof(cmd), "GetHoldRegs(%d, %d, %d, %s)", request.id, request.addr, request.count, request.type.c_str());
+        commander_->dashboardDoCmd(cmd, response.res, result);
+        response.res = str2Int(result[0].c_str());
+        for(int i = 0; i<request.count; i++){
+            response.regs[i] = str2Int(result[i+1].c_str());
+        }
+        return true;
+    }
+    catch (const TcpClientException& err)
+    {
+        ROS_ERROR("%s", err.what());
+        response.res = -1;
+        return false;
+    }
+    catch (const std::exception& err)
+    {
+        ROS_ERROR("%s", err.what());
+        response.res = -1;
+        return false;
+    }
+
 }
 
 bool CR5Robot::modbusCreate(dobot_bringup::ModbusCreate::Request& request,

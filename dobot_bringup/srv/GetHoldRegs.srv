@@ -2,6 +2,7 @@
 int32 id
 int32 addr
 int32 count
-int32 type
+string type
 ---
 int32[] regs
+int32 res

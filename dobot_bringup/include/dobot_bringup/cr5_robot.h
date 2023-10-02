@@ -47,7 +47,7 @@
 #include <dobot_bringup/StopScript.h>
 #include <dobot_bringup/PauseScript.h>
 #include <dobot_bringup/ContinueScript.h>
-//#include <dobot_bringup/GetHoldRegs.h>
+#include <dobot_bringup/GetHoldRegs.h>
 //#include <dobot_bringup/SetHoldRegs.h>
 #include <dobot_bringup/SetSafeSkin.h>
 #include <dobot_bringup/SetObstacleAvoid.h>
@@ -171,7 +171,7 @@ protected:
     bool stopScript(dobot_bringup::StopScript::Request& request, dobot_bringup::StopScript::Response& response);
     bool pauseScript(dobot_bringup::PauseScript::Request& request, dobot_bringup::PauseScript::Response& response);
     bool continueScript(dobot_bringup::ContinueScript::Request& request, dobot_bringup::ContinueScript::Response& response);
-//    bool getHoldRegs(dobot_bringup::SpeedFactor::Request& request, dobot_bringup::SpeedFactor::Response& response);
+    bool getHoldRegs(dobot_bringup::GetHoldRegs::Request& request, dobot_bringup::GetHoldRegs::Response& response);
     bool modbusCreate(dobot_bringup::ModbusCreate::Request& request, dobot_bringup::ModbusCreate::Response& response);
     bool setHoldRegs(dobot_bringup::SetHoldRegs::Request& request, dobot_bringup::SetHoldRegs::Response& response);
     bool setSafeSkin(dobot_bringup::SetSafeSkin::Request& request, dobot_bringup::SetSafeSkin::Response& response);
