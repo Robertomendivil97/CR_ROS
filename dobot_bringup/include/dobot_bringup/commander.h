@@ -240,6 +240,8 @@ public:
     {
         if (str.find(send_cmd) == std::string::npos)
             throw std::logic_error(std::string("Invalid string : ") + str);
+        
+            
 
         std::size_t pos = str.find(',');
         if (pos == std::string::npos)
@@ -284,12 +286,14 @@ private:
         {
             uint32_t has_read;
             char buf[1024];
+            char error[1024];
             memset(buf, 0, sizeof(buf));
 
             ROS_INFO("tcp send cmd : %s", cmd);
             tcp->tcpSend(cmd, strlen(cmd));
 
             char* recv_ptr = buf;
+            
 
             while (true)
             {

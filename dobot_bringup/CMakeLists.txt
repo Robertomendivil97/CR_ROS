@@ -55,7 +55,8 @@ add_service_files(
         DisableRobot.srv
         ClearError.srv
         StartDrag.srv
-        SetTerminal.srv
+        StopDrag.srv
+        SetTerminal485.srv
         ResetRobot.srv
         SpeedFactor.srv
         User.srv
@@ -84,6 +85,7 @@ add_service_files(
         ContinueScript.srv
         GetHoldRegs.srv
         ModbusCreate.srv
+        ModbusClose.srv
         SetHoldRegs.srv
         SetSafeSkin.srv
         SetObstacleAvoid.srv

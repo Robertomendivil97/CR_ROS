@@ -20,8 +20,9 @@
 #include <dobot_bringup/DisableRobot.h>
 #include <dobot_bringup/ClearError.h>
 #include <dobot_bringup/StartDrag.h>
+#include <dobot_bringup/StopDrag.h>
 //#include <dobot_bringup/ModbusCreate.h>
-#include <dobot_bringup/SetTerminal.h>
+#include <dobot_bringup/SetTerminal485.h>
 #include <dobot_bringup/ResetRobot.h>
 #include <dobot_bringup/SpeedFactor.h>
 #include <dobot_bringup/User.h>
@@ -75,6 +76,7 @@
 #include <dobot_bringup/JointMovJ.h>
 #include <dobot_bringup/RobotStatus.h>
 #include <dobot_bringup/ModbusCreate.h>
+#include <dobot_bringup/ModbusClose.h>
 #include <dobot_bringup/SetHoldRegs.h>
 
 
@@ -144,8 +146,9 @@ protected:
     bool disableRobot(dobot_bringup::DisableRobot::Request& request, dobot_bringup::DisableRobot::Response& response);
     bool clearError(dobot_bringup::ClearError::Request& request, dobot_bringup::ClearError::Response& response);
     bool StartDrag(dobot_bringup::StartDrag::Request& request, dobot_bringup::StartDrag::Response& response);
+    bool StopDrag(dobot_bringup::StopDrag::Request& request, dobot_bringup::StopDrag::Response& response);
     //bool ModbusCreate(dobot_bringup::ModbusCreate::Request& request, dobot_bringup::ModbusCreate::Response& response);
-    bool SetTerminal(dobot_bringup::SetTerminal::Request& request, dobot_bringup::SetTerminal::Response& response);
+    bool SetTerminal485(dobot_bringup::SetTerminal485::Request& request, dobot_bringup::SetTerminal485::Response& response);
     bool resetRobot(dobot_bringup::ResetRobot::Request& request, dobot_bringup::ResetRobot::Response& response);
     bool speedFactor(dobot_bringup::SpeedFactor::Request& request, dobot_bringup::SpeedFactor::Response& response);
     bool user(dobot_bringup::User::Request& request, dobot_bringup::User::Response& response);
@@ -173,6 +176,7 @@ protected:
     bool continueScript(dobot_bringup::ContinueScript::Request& request, dobot_bringup::ContinueScript::Response& response);
     bool getHoldRegs(dobot_bringup::GetHoldRegs::Request& request, dobot_bringup::GetHoldRegs::Response& response);
     bool modbusCreate(dobot_bringup::ModbusCreate::Request& request, dobot_bringup::ModbusCreate::Response& response);
+    bool modbusClose(dobot_bringup::ModbusClose::Request& request, dobot_bringup::ModbusClose::Response& response);
     bool setHoldRegs(dobot_bringup::SetHoldRegs::Request& request, dobot_bringup::SetHoldRegs::Response& response);
     bool setSafeSkin(dobot_bringup::SetSafeSkin::Request& request, dobot_bringup::SetSafeSkin::Response& response);
     bool setObstacleAvoid(dobot_bringup::SetObstacleAvoid::Request& request, dobot_bringup::SetObstacleAvoid::Response& response);
