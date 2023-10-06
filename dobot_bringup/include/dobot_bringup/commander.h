@@ -252,6 +252,8 @@ public:
         assert(pos < sizeof(buf));
         str.copy(buf, pos, 0);
         buf[pos] = 0;
+        ROS_INFO("Error id = %s", buf);
+   
 
         char* end;
         err = (int32_t)strtol(buf, &end, 10);

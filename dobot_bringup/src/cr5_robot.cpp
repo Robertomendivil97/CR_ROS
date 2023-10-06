@@ -42,10 +42,10 @@ void CR5Robot::init()
     server_tbl_.push_back(
         control_nh_.advertiseService("/dobot_bringup/srv/DisableRobot", &CR5Robot::disableRobot, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/ClearError", &CR5Robot::clearError, this));
-    server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/StartDrag", &CR5Robot::StartDrag, this));
-    server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/StopDrag", &CR5Robot::StopDrag, this));
+    server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/StartDrag", &CR5Robot::startDrag, this));
+    server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/StopDrag", &CR5Robot::stopDrag, this));
     //server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/ModbusCreate", &CR5Robot::ModbusCreate, this));
-    server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/SetTerminal485", &CR5Robot::SetTerminal485, this));
+    server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/SetTerminal485", &CR5Robot::setTerminal485, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/ResetRobot", &CR5Robot::resetRobot, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/SpeedFactor", &CR5Robot::speedFactor, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/User", &CR5Robot::user, this));
@@ -265,7 +265,7 @@ bool CR5Robot::clearError(dobot_bringup::ClearError::Request& request, dobot_bri
     }
 }
 
-bool CR5Robot::StartDrag(dobot_bringup::StartDrag::Request& request, dobot_bringup::StartDrag::Response& response)
+bool CR5Robot::startDrag(dobot_bringup::StartDrag::Request& request, dobot_bringup::StartDrag::Response& response)
 {
     try
     {
@@ -281,7 +281,7 @@ bool CR5Robot::StartDrag(dobot_bringup::StartDrag::Request& request, dobot_bring
     }
 }
 
-bool CR5Robot::StopDrag(dobot_bringup::StopDrag::Request& request, dobot_bringup::StopDrag::Response& response)
+bool CR5Robot::stopDrag(dobot_bringup::StopDrag::Request& request, dobot_bringup::StopDrag::Response& response)
 {
     try
     {
@@ -297,7 +297,7 @@ bool CR5Robot::StopDrag(dobot_bringup::StopDrag::Request& request, dobot_bringup
     }
 }
 
-bool CR5Robot::SetTerminal485(dobot_bringup::SetTerminal485::Request& request, dobot_bringup::SetTerminal485::Response& response)
+bool CR5Robot::setTerminal485(dobot_bringup::SetTerminal485::Request& request, dobot_bringup::SetTerminal485::Response& response)
 {
     try
     {

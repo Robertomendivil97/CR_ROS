@@ -16,13 +16,15 @@
 #include <actionlib/server/action_server.h>
 #include <control_msgs/FollowJointTrajectoryAction.h>
 
+/*
+ *----------------------------------------------------------------------------------------------------------------------
+ *                                                  dashboard
+ *----------------------------------------------------------------------------------------------------------------------
+ */
+
 #include <dobot_bringup/EnableRobot.h>
 #include <dobot_bringup/DisableRobot.h>
 #include <dobot_bringup/ClearError.h>
-#include <dobot_bringup/StartDrag.h>
-#include <dobot_bringup/StopDrag.h>
-//#include <dobot_bringup/ModbusCreate.h>
-#include <dobot_bringup/SetTerminal485.h>
 #include <dobot_bringup/ResetRobot.h>
 #include <dobot_bringup/SpeedFactor.h>
 #include <dobot_bringup/User.h>
@@ -41,44 +43,48 @@
 #include <dobot_bringup/SpeedL.h>
 #include <dobot_bringup/Arch.h>
 #include <dobot_bringup/CP.h>
-#include <dobot_bringup/LimZ.h>
 #include <dobot_bringup/SetArmOrientation.h>
 #include <dobot_bringup/PowerOn.h>
 #include <dobot_bringup/RunScript.h>
 #include <dobot_bringup/StopScript.h>
 #include <dobot_bringup/PauseScript.h>
 #include <dobot_bringup/ContinueScript.h>
-#include <dobot_bringup/GetHoldRegs.h>
-//#include <dobot_bringup/SetHoldRegs.h>
 #include <dobot_bringup/SetSafeSkin.h>
-#include <dobot_bringup/SetObstacleAvoid.h>
-
 #include <dobot_bringup/SetCollisionLevel.h>
 #include <dobot_bringup/EmergencyStop.h>
+#include <dobot_bringup/ModbusCreate.h>
+#include <dobot_bringup/ModbusClose.h>
+#include <dobot_bringup/GetHoldRegs.h>
+#include <dobot_bringup/SetHoldRegs.h>
+#include <dobot_bringup/StartDrag.h>
+#include <dobot_bringup/StopDrag.h>
+#include <dobot_bringup/SetTerminal485.h>
 
-
-
+/*
+ *----------------------------------------------------------------------------------------------------------------------
+ *                                                  motion
+ *----------------------------------------------------------------------------------------------------------------------
+ */
 
 #include <dobot_bringup/MovJ.h>
 #include <dobot_bringup/MovL.h>
-#include <dobot_bringup/Jump.h>
+#include <dobot_bringup/JointMovJ.h>
 #include <dobot_bringup/Arc.h>
-#include <dobot_bringup/Sync.h>
-#include <dobot_bringup/Circle.h>
 #include <dobot_bringup/ServoJ.h>
+#include <dobot_bringup/ServoP.h>
 #include <dobot_bringup/StartTrace.h>
 #include <dobot_bringup/StartPath.h>
 #include <dobot_bringup/StartFCTrace.h>
+#include <dobot_bringup/Sync.h>
 #include <dobot_bringup/MoveJog.h>
-#include <dobot_bringup/ServoP.h>
 #include <dobot_bringup/RelMovJ.h>
 #include <dobot_bringup/RelMovL.h>
-#include <dobot_bringup/JointMovJ.h>
-#include <dobot_bringup/RobotStatus.h>
-#include <dobot_bringup/ModbusCreate.h>
-#include <dobot_bringup/ModbusClose.h>
-#include <dobot_bringup/SetHoldRegs.h>
 
+#include <dobot_bringup/Jump.h>
+#include <dobot_bringup/Circle.h>
+#include <dobot_bringup/RobotStatus.h>
+#include <dobot_bringup/LimZ.h>
+#include <dobot_bringup/SetObstacleAvoid.h>
 
 
 using namespace actionlib;
@@ -145,10 +151,9 @@ protected:
     bool enableRobot(dobot_bringup::EnableRobot::Request& request, dobot_bringup::EnableRobot::Response& response);
     bool disableRobot(dobot_bringup::DisableRobot::Request& request, dobot_bringup::DisableRobot::Response& response);
     bool clearError(dobot_bringup::ClearError::Request& request, dobot_bringup::ClearError::Response& response);
-    bool StartDrag(dobot_bringup::StartDrag::Request& request, dobot_bringup::StartDrag::Response& response);
-    bool StopDrag(dobot_bringup::StopDrag::Request& request, dobot_bringup::StopDrag::Response& response);
-    //bool ModbusCreate(dobot_bringup::ModbusCreate::Request& request, dobot_bringup::ModbusCreate::Response& response);
-    bool SetTerminal485(dobot_bringup::SetTerminal485::Request& request, dobot_bringup::SetTerminal485::Response& response);
+    bool startDrag(dobot_bringup::StartDrag::Request& request, dobot_bringup::StartDrag::Response& response);
+    bool stopDrag(dobot_bringup::StopDrag::Request& request, dobot_bringup::StopDrag::Response& response);
+    bool setTerminal485(dobot_bringup::SetTerminal485::Request& request, dobot_bringup::SetTerminal485::Response& response);
     bool resetRobot(dobot_bringup::ResetRobot::Request& request, dobot_bringup::ResetRobot::Response& response);
     bool speedFactor(dobot_bringup::SpeedFactor::Request& request, dobot_bringup::SpeedFactor::Response& response);
     bool user(dobot_bringup::User::Request& request, dobot_bringup::User::Response& response);
