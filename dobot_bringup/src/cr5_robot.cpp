@@ -305,9 +305,10 @@ bool CR5Robot::setTerminal485(dobot_bringup::SetTerminal485::Request& request,
     try
     {
         char cmd[100];
+        std::vector<int> result;
         sprintf(cmd, "SetTerminal485(%d,8,%s,1)", request.baudRate, request.parity.c_str());
-        commander_->dashboardDoCmd(cmd, response.res);
-        response.res = 0;
+        commander_->dashboardDoCmd(cmd, response.res, result);
+        response.res = result[0];
         return true;
     }
     catch (const TcpClientException& err)
@@ -403,12 +404,12 @@ bool CR5Robot::robotMode(dobot_bringup::RobotMode::Request& request,
     {
         const char* cmd = "RobotMode()";
 
-        std::vector<std::string> result;
+        std::vector<int> result;
         commander_->dashboardDoCmd(cmd, response.res, result);
         if (result.empty())
             throw std::logic_error("robotMode : Empty string");
 
-        response.mode = str2Int(result[0].c_str());
+        response.mode = result[0];
         response.res = 0;
         return true;
     }
@@ -771,13 +772,18 @@ bool CR5Robot::getHoldRegs(dobot_bringup::GetHoldRegs::Request& request,
     try
     {
         char cmd[300];
-        std::vector<std::string> result;
+        std::vector<int> result;
         sprintf(cmd, "GetHoldRegs(%d,%d,%d,%s)", request.id, request.addr, request.count, request.type.c_str());
         commander_->dashboardDoCmd(cmd, response.res, result);
-        // if (result.empty())
-        //     throw std::logic_error("Haven't recv any result");
-        // response.res = str2Int(result[0].c_str());
-       
+        if (result.empty())
+            throw std::logic_error("Haven't recv any result");
+        response.res = result[0];
+        if(result.size() != 1){
+            for(int i = 1; i<result.size(); i++){
+                response.regs.push_back(result[i]);
+            }
+        }
+        
         return true;
     }
     catch (const TcpClientException& err)
@@ -801,16 +807,16 @@ bool CR5Robot::modbusCreate(dobot_bringup::ModbusCreate::Request& request,
     try
     {
         char cmd[300];
-        std::vector<std::string> result;
+        std::vector<int> result;
         snprintf(cmd, sizeof(cmd), "ModbusCreate(%s,%d,%d,%d)", request.ip.c_str(), request.port, request.slave_id,
                  request.is_rtu);
         //cmd[sizeof(cmd) - 1] = 0;
         commander_->dashboardDoCmd(cmd, response.res, result);
-        // if (result.size() != 2 and result.empty())
-        //     throw std::logic_error("Haven't recv any result");
+        if (result.size() != 2 and result.empty())
+            throw std::logic_error("Haven't recv any result");
         
-        // response.res = str2Int(result[0].c_str());
-        // response.index = str2Int(result[1].c_str());
+        response.res = result[0];
+        response.index = result[1];
         return true;
     }
     catch (const TcpClientException& err)
@@ -835,9 +841,10 @@ bool CR5Robot::modbusClose(dobot_bringup::ModbusClose::Request& request,
     try
     {
         char cmd[300];
+        std::vector<int> result;
         sprintf(cmd, "ModbusClose(%d)", request.index);
-        commander_->dashboardDoCmd(cmd, response.res);
-        response.res = 0;
+        commander_->dashboardDoCmd(cmd, response.res, result);
+        response.res = result[0];
         return true;
     }
     catch (const TcpClientException& err)
@@ -862,7 +869,7 @@ bool CR5Robot::setHoldRegs(dobot_bringup::SetHoldRegs::Request& request,
     try
     {
         char cmd[200];
-        std::vector<std::string> result;
+        std::vector<int> result;
         snprintf(cmd, sizeof(cmd), "SetHoldRegs(%d,%d,%d,%s,%s)", request.index, request.addr, request.count,
                  request.regs.c_str(), request.type.c_str());
         commander_->dashboardDoCmd(cmd, response.res, result);

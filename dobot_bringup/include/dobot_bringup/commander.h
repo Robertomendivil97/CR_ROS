@@ -216,28 +216,28 @@ public:
 
     void dashboardDoCmd(const char* cmd, int32_t& err_id)
     {
-        std::vector<std::string> result;
+        std::vector<int> result;
         tcpDoCmd(dash_board_tcp_, cmd, err_id, result);
     }
 
-    void dashboardDoCmd(const char* cmd, int32_t& err_id, std::vector<std::string>& result)
+    void dashboardDoCmd(const char* cmd, int32_t& err_id, std::vector<int>& result)
     {
         tcpDoCmd(dash_board_tcp_, cmd, err_id, result);
     }
 
     void motionDoCmd(const char* cmd, int32_t& err_id)
     {
-        std::vector<std::string> result;
+        std::vector<int> result;
         tcpDoCmd(motion_cmd_tcp_, cmd, err_id, result);
     }
 
-    void motionDoCmd(const char* cmd, int32_t& err_id, std::vector<std::string>& result)
+    void motionDoCmd(const char* cmd, int32_t& err_id, std::vector<int>& result)
     {
         tcpDoCmd(motion_cmd_tcp_, cmd, err_id, result);
     }
 
     static void parseString(const std::string& str, const std::string& send_cmd, int32_t& err,
-                            std::vector<std::string>& result)
+                            std::vector<int>& result)
     {
 
         if (str.find(send_cmd) == std::string::npos)
@@ -254,14 +254,9 @@ public:
         assert(pos < sizeof(buf));
         str.copy(buf, pos, 0);
         buf[pos] = 0;
-        result.push_back(buf); 
-        ROS_INFO("ERROR ID in buf = %s", buf);
-        //ROS_INFO("ERROR ID in string = %s", result);
         char* end;
         err = (int32_t)strtol(buf, &end, 10);
-        ROS_INFO("ERROR ID in long int= %d", err);
-        result_test.push_back(err);
-        ROS_INFO("Result vector : %d", result_test[0]);
+        result.emplace_back(err);
 
         if (*end != '\0')
             throw std::logic_error(std::string("Invalid err id: ") + str);
@@ -282,8 +277,6 @@ public:
             char* buf_result = new char[str.length() + 1];
             str.copy(buf_result, end_pos - start_pos - 1, start_pos + 1);
             buf_result[end_pos] = 0; 
-            ROS_INFO("Result in buf = %s", buf_result);
-
 
             std::stringstream ss;
             ss << buf_result;
@@ -293,19 +286,19 @@ public:
                 std::string substr;
                 getline(ss, substr, ',');
                 int res_test = stoi(substr);
-                result_test.push_back(res_test);
+                result.emplace_back(res_test);
 
             }
             
         }
-        for(int i = 0; i<=result_test.size()-1; i++){
-            ROS_INFO("Result: %d", result_test[i]);
+        for(int i = 0; i<=result.size()-1; i++){
+            ROS_INFO("Result: %d", result[i]);
         }
     }
 
 private:
     static void tcpDoCmd(std::shared_ptr<TcpClient>& tcp, const char* cmd, int32_t& err_id,
-                         std::vector<std::string>& result)
+                         std::vector<int>& result)
     {
         try
         {
