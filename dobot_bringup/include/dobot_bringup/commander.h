@@ -271,9 +271,7 @@ public:
 
         assert(end_pos > start_pos);
         //char buf_result[str.length() + 1];
-        if(end_pos-1 == start_pos){
-            ROS_INFO("There is no result");
-        }else{
+        if(end_pos-1 != start_pos){
             char* buf_result = new char[str.length() + 1];
             str.copy(buf_result, end_pos - start_pos - 1, start_pos + 1);
             buf_result[end_pos] = 0; 
@@ -290,9 +288,6 @@ public:
 
             }
             
-        }
-        for(int i = 0; i<=result.size()-1; i++){
-            ROS_INFO("Result: %d", result[i]);
         }
     }
 
