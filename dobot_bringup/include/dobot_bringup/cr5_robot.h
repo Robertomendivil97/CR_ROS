@@ -147,6 +147,7 @@ public:
      */
     bool isConnected() const;
 
+
 protected:
     bool enableRobot(dobot_bringup::EnableRobot::Request& request, dobot_bringup::EnableRobot::Response& response);
     bool disableRobot(dobot_bringup::DisableRobot::Request& request, dobot_bringup::DisableRobot::Response& response);

@@ -10,6 +10,7 @@
  */
 
 #include <ros/ros.h>
+#include <std_msgs/String.h>
 #include <ros/param.h>
 #include <dobot_bringup/cr5_robot.h>
 #include <sensor_msgs/JointState.h>
@@ -40,6 +41,8 @@ int main(int argc, char* argv[])
         dobot_bringup::ToolVectorActual tool_vector_actual_msg;
         ros::Publisher tool_vector_pub =
             private_node.advertise<dobot_bringup::ToolVectorActual>("/dobot_bringup/msg/ToolVectorActual", 100);
+        ros::Publisher error_pub = private_node.advertise<std_msgs::String>("/error_topic",100);
+
         string z ="/";
         const char* robot_type = getenv("DOBOT_TYPE");
         string a = robot_type == nullptr ? "cr5" : robot_type;

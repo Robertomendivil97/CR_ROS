@@ -44,7 +44,6 @@ void CR5Robot::init()
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/ClearError", &CR5Robot::clearError, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/StartDrag", &CR5Robot::startDrag, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/StopDrag", &CR5Robot::stopDrag, this));
-    //server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/ModbusCreate", &CR5Robot::ModbusCreate, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/SetTerminal485", &CR5Robot::setTerminal485, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/ResetRobot", &CR5Robot::resetRobot, this));
     server_tbl_.push_back(control_nh_.advertiseService("/dobot_bringup/srv/SpeedFactor", &CR5Robot::speedFactor, this));
@@ -211,14 +210,14 @@ void CR5Robot::getToolVectorActual(double* val)
 {
     commander_->getToolVectorActual(val);
 }
-
 /*
  *----------------------------------------------------------------------------------------------------------------------
  *                                                  dashboard
  *----------------------------------------------------------------------------------------------------------------------
  */
 
-bool CR5Robot::enableRobot(dobot_bringup::EnableRobot::Request& request, dobot_bringup::EnableRobot::Response& response)
+bool CR5Robot::enableRobot(dobot_bringup::EnableRobot::Request& request, 
+                           dobot_bringup::EnableRobot::Response& response)
 {
     try
     {
@@ -249,7 +248,8 @@ bool CR5Robot::disableRobot(dobot_bringup::DisableRobot::Request& request,
     }
 }
 
-bool CR5Robot::clearError(dobot_bringup::ClearError::Request& request, dobot_bringup::ClearError::Response& response)
+bool CR5Robot::clearError(dobot_bringup::ClearError::Request& request, 
+                          dobot_bringup::ClearError::Response& response)
 {
     try
     {
@@ -265,7 +265,8 @@ bool CR5Robot::clearError(dobot_bringup::ClearError::Request& request, dobot_bri
     }
 }
 
-bool CR5Robot::startDrag(dobot_bringup::StartDrag::Request& request, dobot_bringup::StartDrag::Response& response)
+bool CR5Robot::startDrag(dobot_bringup::StartDrag::Request& request, 
+                         dobot_bringup::StartDrag::Response& response)
 {
     try
     {
@@ -281,7 +282,8 @@ bool CR5Robot::startDrag(dobot_bringup::StartDrag::Request& request, dobot_bring
     }
 }
 
-bool CR5Robot::stopDrag(dobot_bringup::StopDrag::Request& request, dobot_bringup::StopDrag::Response& response)
+bool CR5Robot::stopDrag(dobot_bringup::StopDrag::Request& request, 
+                        dobot_bringup::StopDrag::Response& response)
 {
     try
     {
@@ -297,7 +299,8 @@ bool CR5Robot::stopDrag(dobot_bringup::StopDrag::Request& request, dobot_bringup
     }
 }
 
-bool CR5Robot::setTerminal485(dobot_bringup::SetTerminal485::Request& request, dobot_bringup::SetTerminal485::Response& response)
+bool CR5Robot::setTerminal485(dobot_bringup::SetTerminal485::Request& request, 
+                            dobot_bringup::SetTerminal485::Response& response)
 {
     try
     {
@@ -322,7 +325,8 @@ bool CR5Robot::setTerminal485(dobot_bringup::SetTerminal485::Request& request, d
     
 }
 
-bool CR5Robot::resetRobot(dobot_bringup::ResetRobot::Request& request, dobot_bringup::ResetRobot::Response& response)
+bool CR5Robot::resetRobot(dobot_bringup::ResetRobot::Request& request, 
+                          dobot_bringup::ResetRobot::Response& response)
 {
     try
     {
@@ -338,7 +342,8 @@ bool CR5Robot::resetRobot(dobot_bringup::ResetRobot::Request& request, dobot_bri
     }
 }
 
-bool CR5Robot::speedFactor(dobot_bringup::SpeedFactor::Request& request, dobot_bringup::SpeedFactor::Response& response)
+bool CR5Robot::speedFactor(dobot_bringup::SpeedFactor::Request& request, 
+                           dobot_bringup::SpeedFactor::Response& response)
 {
     try
     {
@@ -355,7 +360,8 @@ bool CR5Robot::speedFactor(dobot_bringup::SpeedFactor::Request& request, dobot_b
     }
 }
 
-bool CR5Robot::user(dobot_bringup::User::Request& request, dobot_bringup::User::Response& response)
+bool CR5Robot::user(dobot_bringup::User::Request& request, 
+                    dobot_bringup::User::Response& response)
 {
     try
     {
@@ -372,7 +378,8 @@ bool CR5Robot::user(dobot_bringup::User::Request& request, dobot_bringup::User::
     }
 }
 
-bool CR5Robot::tool(dobot_bringup::Tool::Request& request, dobot_bringup::Tool::Response& response)
+bool CR5Robot::tool(dobot_bringup::Tool::Request& request, 
+                    dobot_bringup::Tool::Response& response)
 {
     try
     {
@@ -389,7 +396,8 @@ bool CR5Robot::tool(dobot_bringup::Tool::Request& request, dobot_bringup::Tool::
     }
 }
 
-bool CR5Robot::robotMode(dobot_bringup::RobotMode::Request& request, dobot_bringup::RobotMode::Response& response)
+bool CR5Robot::robotMode(dobot_bringup::RobotMode::Request& request, 
+                         dobot_bringup::RobotMode::Response& response)
 {
     try
     {
@@ -418,7 +426,8 @@ bool CR5Robot::robotMode(dobot_bringup::RobotMode::Request& request, dobot_bring
     }
 }
 
-bool CR5Robot::payload(dobot_bringup::PayLoad::Request& request, dobot_bringup::PayLoad::Response& response)
+bool CR5Robot::payload(dobot_bringup::PayLoad::Request& request, 
+                       dobot_bringup::PayLoad::Response& response)
 {
     try
     {
@@ -435,7 +444,8 @@ bool CR5Robot::payload(dobot_bringup::PayLoad::Request& request, dobot_bringup::
     }
 }
 
-bool CR5Robot::DO(dobot_bringup::DO::Request& request, dobot_bringup::DO::Response& response)
+bool CR5Robot::DO(dobot_bringup::DO::Request& request, 
+                  dobot_bringup::DO::Response& response)
 {
     try
     {
@@ -452,7 +462,8 @@ bool CR5Robot::DO(dobot_bringup::DO::Request& request, dobot_bringup::DO::Respon
     }
 }
 
-bool CR5Robot::DOExecute(dobot_bringup::DOExecute::Request& request, dobot_bringup::DOExecute::Response& response)
+bool CR5Robot::DOExecute(dobot_bringup::DOExecute::Request& request, 
+                         dobot_bringup::DOExecute::Response& response)
 {
     try
     {
@@ -469,7 +480,8 @@ bool CR5Robot::DOExecute(dobot_bringup::DOExecute::Request& request, dobot_bring
     }
 }
 
-bool CR5Robot::toolDO(dobot_bringup::ToolDO::Request& request, dobot_bringup::ToolDO::Response& response)
+bool CR5Robot::toolDO(dobot_bringup::ToolDO::Request& request, 
+                      dobot_bringup::ToolDO::Response& response)
 {
     try
     {
@@ -504,7 +516,8 @@ bool CR5Robot::toolDOExecute(dobot_bringup::ToolDOExecute::Request& request,
     }
 }
 
-bool CR5Robot::AO(dobot_bringup::AO::Request& request, dobot_bringup::AO::Response& response)
+bool CR5Robot::AO(dobot_bringup::AO::Request& request, 
+                  dobot_bringup::AO::Response& response)
 {
     try
     {
@@ -521,7 +534,8 @@ bool CR5Robot::AO(dobot_bringup::AO::Request& request, dobot_bringup::AO::Respon
     }
 }
 
-bool CR5Robot::AOExecute(dobot_bringup::AOExecute::Request& request, dobot_bringup::AOExecute::Response& response)
+bool CR5Robot::AOExecute(dobot_bringup::AOExecute::Request& request, 
+                         dobot_bringup::AOExecute::Response& response)
 {
     try
     {
@@ -538,7 +552,8 @@ bool CR5Robot::AOExecute(dobot_bringup::AOExecute::Request& request, dobot_bring
     }
 }
 
-bool CR5Robot::accJ(dobot_bringup::AccJ::Request& request, dobot_bringup::AccJ::Response& response)
+bool CR5Robot::accJ(dobot_bringup::AccJ::Request& request, 
+                    dobot_bringup::AccJ::Response& response)
 {
     try
     {
@@ -555,7 +570,8 @@ bool CR5Robot::accJ(dobot_bringup::AccJ::Request& request, dobot_bringup::AccJ::
     }
 }
 
-bool CR5Robot::accL(dobot_bringup::AccL::Request& request, dobot_bringup::AccL::Response& response)
+bool CR5Robot::accL(dobot_bringup::AccL::Request& request, 
+                    dobot_bringup::AccL::Response& response)
 {
     try
     {
@@ -572,7 +588,8 @@ bool CR5Robot::accL(dobot_bringup::AccL::Request& request, dobot_bringup::AccL::
     }
 }
 
-bool CR5Robot::speedJ(dobot_bringup::SpeedJ::Request& request, dobot_bringup::SpeedJ::Response& response)
+bool CR5Robot::speedJ(dobot_bringup::SpeedJ::Request& request, 
+                      dobot_bringup::SpeedJ::Response& response)
 {
     try
     {
@@ -589,7 +606,8 @@ bool CR5Robot::speedJ(dobot_bringup::SpeedJ::Request& request, dobot_bringup::Sp
     }
 }
 
-bool CR5Robot::speedL(dobot_bringup::SpeedL::Request& request, dobot_bringup::SpeedL::Response& response)
+bool CR5Robot::speedL(dobot_bringup::SpeedL::Request& request, 
+                      dobot_bringup::SpeedL::Response& response)
 {
     try
     {
@@ -606,7 +624,8 @@ bool CR5Robot::speedL(dobot_bringup::SpeedL::Request& request, dobot_bringup::Sp
     }
 }
 
-bool CR5Robot::arch(dobot_bringup::Arch::Request& request, dobot_bringup::Arch::Response& response)
+bool CR5Robot::arch(dobot_bringup::Arch::Request& request, 
+                    dobot_bringup::Arch::Response& response)
 {
     try
     {
@@ -623,7 +642,8 @@ bool CR5Robot::arch(dobot_bringup::Arch::Request& request, dobot_bringup::Arch::
     }
 }
 
-bool CR5Robot::cp(dobot_bringup::CP::Request& request, dobot_bringup::CP::Response& response)
+bool CR5Robot::cp(dobot_bringup::CP::Request& request, 
+                  dobot_bringup::CP::Response& response)
 {
     try
     {
@@ -640,7 +660,8 @@ bool CR5Robot::cp(dobot_bringup::CP::Request& request, dobot_bringup::CP::Respon
     }
 }
 
-bool CR5Robot::limZ(dobot_bringup::LimZ::Request& request, dobot_bringup::LimZ::Response& response)
+bool CR5Robot::limZ(dobot_bringup::LimZ::Request& request, 
+                    dobot_bringup::LimZ::Response& response)
 {
     try
     {
@@ -675,7 +696,8 @@ bool CR5Robot::setArmOrientation(dobot_bringup::SetArmOrientation::Request& requ
     }
 }
 
-bool CR5Robot::powerOn(dobot_bringup::PowerOn::Request& request, dobot_bringup::PowerOn::Response& response)
+bool CR5Robot::powerOn(dobot_bringup::PowerOn::Request& request, 
+                       dobot_bringup::PowerOn::Response& response)
 {
     try
     {
@@ -691,7 +713,8 @@ bool CR5Robot::powerOn(dobot_bringup::PowerOn::Request& request, dobot_bringup::
     }
 }
 
-bool CR5Robot::runScript(dobot_bringup::RunScript::Request& request, dobot_bringup::RunScript::Response& response)
+bool CR5Robot::runScript(dobot_bringup::RunScript::Request& request, 
+                         dobot_bringup::RunScript::Response& response)
 {
     try
     {
@@ -708,7 +731,8 @@ bool CR5Robot::runScript(dobot_bringup::RunScript::Request& request, dobot_bring
     }
 }
 
-bool CR5Robot::stopScript(dobot_bringup::StopScript::Request& request, dobot_bringup::StopScript::Response& response)
+bool CR5Robot::stopScript(dobot_bringup::StopScript::Request& request, 
+                          dobot_bringup::StopScript::Response& response)
 {
     try
     {
@@ -724,7 +748,8 @@ bool CR5Robot::stopScript(dobot_bringup::StopScript::Request& request, dobot_bri
     }
 }
 
-bool CR5Robot::pauseScript(dobot_bringup::PauseScript::Request& request, dobot_bringup::PauseScript::Response& response)
+bool CR5Robot::pauseScript(dobot_bringup::PauseScript::Request& request, 
+                           dobot_bringup::PauseScript::Response& response)
 {
     try
     {
@@ -740,7 +765,8 @@ bool CR5Robot::pauseScript(dobot_bringup::PauseScript::Request& request, dobot_b
     }
 }
 
-bool CR5Robot::getHoldRegs(dobot_bringup::GetHoldRegs::Request& request, dobot_bringup::GetHoldRegs::Response& response)
+bool CR5Robot::getHoldRegs(dobot_bringup::GetHoldRegs::Request& request, 
+                           dobot_bringup::GetHoldRegs::Response& response)
 {
     try
     {
@@ -803,7 +829,8 @@ bool CR5Robot::modbusCreate(dobot_bringup::ModbusCreate::Request& request,
     }
 }
 
-bool CR5Robot::modbusClose(dobot_bringup::ModbusClose::Request& request, dobot_bringup::ModbusClose::Response& response)
+bool CR5Robot::modbusClose(dobot_bringup::ModbusClose::Request& request, 
+                           dobot_bringup::ModbusClose::Response& response)
 {
     try
     {
@@ -829,7 +856,8 @@ bool CR5Robot::modbusClose(dobot_bringup::ModbusClose::Request& request, dobot_b
 
 }
 
-bool CR5Robot::setHoldRegs(dobot_bringup::SetHoldRegs::Request& request, dobot_bringup::SetHoldRegs::Response& response)
+bool CR5Robot::setHoldRegs(dobot_bringup::SetHoldRegs::Request& request, 
+                           dobot_bringup::SetHoldRegs::Response& response)
 {
     try
     {
@@ -875,7 +903,8 @@ bool CR5Robot::continueScript(dobot_bringup::ContinueScript::Request& request,
     }
 }
 
-bool CR5Robot::setSafeSkin(dobot_bringup::SetSafeSkin::Request& request, dobot_bringup::SetSafeSkin::Response& response)
+bool CR5Robot::setSafeSkin(dobot_bringup::SetSafeSkin::Request& request, 
+                           dobot_bringup::SetSafeSkin::Response& response)
 {
     try
     {
@@ -946,7 +975,8 @@ bool CR5Robot::emergencyStop(dobot_bringup::EmergencyStop::Request& request,
     }
 }
 
-bool CR5Robot::sync(dobot_bringup::Sync::Request& request, dobot_bringup::Sync::Response& response)
+bool CR5Robot::sync(dobot_bringup::Sync::Request& request, 
+                    dobot_bringup::Sync::Response& response)
 {
     try
     {
@@ -969,7 +999,8 @@ bool CR5Robot::sync(dobot_bringup::Sync::Request& request, dobot_bringup::Sync::
  *----------------------------------------------------------------------------------------------------------------------
  */
 
-bool CR5Robot::movJ(dobot_bringup::MovJ::Request& request, dobot_bringup::MovJ::Response& response)
+bool CR5Robot::movJ(dobot_bringup::MovJ::Request& request, 
+                    dobot_bringup::MovJ::Response& response)
 {
     try
     {
@@ -987,7 +1018,8 @@ bool CR5Robot::movJ(dobot_bringup::MovJ::Request& request, dobot_bringup::MovJ::
     }
 }
 
-bool CR5Robot::movL(dobot_bringup::MovL::Request& request, dobot_bringup::MovL::Response& response)
+bool CR5Robot::movL(dobot_bringup::MovL::Request& request, 
+                    dobot_bringup::MovL::Response& response)
 {
     try
     {
@@ -1005,7 +1037,8 @@ bool CR5Robot::movL(dobot_bringup::MovL::Request& request, dobot_bringup::MovL::
     }
 }
 
-bool CR5Robot::servoJ(dobot_bringup::ServoJ::Request& request, dobot_bringup::ServoJ::Response& response)
+bool CR5Robot::servoJ(dobot_bringup::ServoJ::Request& request, 
+                    dobot_bringup::ServoJ::Response& response)
 {
     try
     {
@@ -1024,7 +1057,8 @@ bool CR5Robot::servoJ(dobot_bringup::ServoJ::Request& request, dobot_bringup::Se
     }
 }
 
-bool CR5Robot::jump(dobot_bringup::Jump::Request& request, dobot_bringup::Jump::Response& response)
+bool CR5Robot::jump(dobot_bringup::Jump::Request& request, 
+                    dobot_bringup::Jump::Response& response)
 {
     try
     {
@@ -1042,7 +1076,8 @@ bool CR5Robot::jump(dobot_bringup::Jump::Request& request, dobot_bringup::Jump::
     }
 }
 
-bool CR5Robot::arc(dobot_bringup::Arc::Request& request, dobot_bringup::Arc::Response& response)
+bool CR5Robot::arc(dobot_bringup::Arc::Request& request, 
+                dobot_bringup::Arc::Response& response)
 {
     try
     {
@@ -1061,7 +1096,8 @@ bool CR5Robot::arc(dobot_bringup::Arc::Request& request, dobot_bringup::Arc::Res
     }
 }
 
-bool CR5Robot::circle(dobot_bringup::Circle::Request& request, dobot_bringup::Circle::Response& response)
+bool CR5Robot::circle(dobot_bringup::Circle::Request& request, 
+                    dobot_bringup::Circle::Response& response)
 {
     try
     {
@@ -1080,7 +1116,8 @@ bool CR5Robot::circle(dobot_bringup::Circle::Request& request, dobot_bringup::Ci
     }
 }
 
-bool CR5Robot::servoP(dobot_bringup::ServoP::Request& request, dobot_bringup::ServoP::Response& response)
+bool CR5Robot::servoP(dobot_bringup::ServoP::Request& request, 
+                    dobot_bringup::ServoP::Response& response)
 {
     try
     {
@@ -1098,7 +1135,8 @@ bool CR5Robot::servoP(dobot_bringup::ServoP::Request& request, dobot_bringup::Se
     }
 }
 
-bool CR5Robot::relMovJ(dobot_bringup::RelMovJ::Request& request, dobot_bringup::RelMovJ::Response& response)
+bool CR5Robot::relMovJ(dobot_bringup::RelMovJ::Request& request, 
+                    dobot_bringup::RelMovJ::Response& response)
 {
     try
     {
@@ -1116,7 +1154,8 @@ bool CR5Robot::relMovJ(dobot_bringup::RelMovJ::Request& request, dobot_bringup::
     }
 }
 
-bool CR5Robot::relMovL(dobot_bringup::RelMovL::Request& request, dobot_bringup::RelMovL::Response& response)
+bool CR5Robot::relMovL(dobot_bringup::RelMovL::Request& request, 
+                    dobot_bringup::RelMovL::Response& response)
 {
     try
     {
@@ -1133,7 +1172,8 @@ bool CR5Robot::relMovL(dobot_bringup::RelMovL::Request& request, dobot_bringup::
     }
 }
 
-bool CR5Robot::jointMovJ(dobot_bringup::JointMovJ::Request& request, dobot_bringup::JointMovJ::Response& response)
+bool CR5Robot::jointMovJ(dobot_bringup::JointMovJ::Request& request, 
+                        dobot_bringup::JointMovJ::Response& response)
 {
     try
     {
@@ -1151,7 +1191,8 @@ bool CR5Robot::jointMovJ(dobot_bringup::JointMovJ::Request& request, dobot_bring
     }
 }
 
-bool CR5Robot::startTrace(dobot_bringup::StartTrace::Request& request, dobot_bringup::StartTrace::Response& response)
+bool CR5Robot::startTrace(dobot_bringup::StartTrace::Request& request, 
+                        dobot_bringup::StartTrace::Response& response)
 {
     try
     {
@@ -1168,7 +1209,8 @@ bool CR5Robot::startTrace(dobot_bringup::StartTrace::Request& request, dobot_bri
     }
 }
 
-bool CR5Robot::startPath(dobot_bringup::StartPath::Request& request, dobot_bringup::StartPath::Response& response)
+bool CR5Robot::startPath(dobot_bringup::StartPath::Request& request, 
+                        dobot_bringup::StartPath::Response& response)
 {
     try
     {
@@ -1203,7 +1245,8 @@ bool CR5Robot::startFCTrace(dobot_bringup::StartFCTrace::Request& request,
     }
 }
 
-bool CR5Robot::moveJog(dobot_bringup::MoveJog::Request& request, dobot_bringup::MoveJog::Response& response)
+bool CR5Robot::moveJog(dobot_bringup::MoveJog::Request& request, 
+                    dobot_bringup::MoveJog::Response& response)
 {
     try
     {

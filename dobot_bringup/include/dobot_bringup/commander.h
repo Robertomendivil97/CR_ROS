@@ -12,6 +12,7 @@
 #pragma once
 
 #include <vector>
+#include <std_msgs/String.h>
 #include <string>
 #include <memory>
 #include <thread>
@@ -238,10 +239,11 @@ public:
     static void parseString(const std::string& str, const std::string& send_cmd, int32_t& err,
                             std::vector<std::string>& result)
     {
+
         if (str.find(send_cmd) == std::string::npos)
             throw std::logic_error(std::string("Invalid string : ") + str);
         
-            
+        std::vector<std::uint32_t> result_test;
 
         std::size_t pos = str.find(',');
         if (pos == std::string::npos)
@@ -252,11 +254,15 @@ public:
         assert(pos < sizeof(buf));
         str.copy(buf, pos, 0);
         buf[pos] = 0;
-        ROS_INFO("Error id = %s", buf);
-   
-
+        result.push_back(buf); 
+        ROS_INFO("ERROR ID in buf = %s", buf);
+        //ROS_INFO("ERROR ID in string = %s", result);
         char* end;
         err = (int32_t)strtol(buf, &end, 10);
+        ROS_INFO("ERROR ID in long int= %d", err);
+        result_test.push_back(err);
+        ROS_INFO("Result vector : %d", result_test[0]);
+
         if (*end != '\0')
             throw std::logic_error(std::string("Invalid err id: ") + str);
 
@@ -269,15 +275,32 @@ public:
             throw std::logic_error(std::string("Has no '}': ") + str);
 
         assert(end_pos > start_pos);
-        char* buf_str = new char[str.length() + 1];
-        str.copy(buf_str, end_pos - start_pos - 1, start_pos + 1);
+        //char buf_result[str.length() + 1];
+        if(end_pos-1 == start_pos){
+            ROS_INFO("There is no result");
+        }else{
+            char* buf_result = new char[str.length() + 1];
+            str.copy(buf_result, end_pos - start_pos - 1, start_pos + 1);
+            buf_result[end_pos] = 0; 
+            ROS_INFO("Result in buf = %s", buf_result);
 
-        std::stringstream ss;
-        ss << buf_str;
-        delete[] buf_str;
 
-        while (ss.getline(buf, sizeof(buf), ','))
-            result.emplace_back(buf);
+            std::stringstream ss;
+            ss << buf_result;
+            //delete[] buf_result;
+
+            while (ss.good()){
+                std::string substr;
+                getline(ss, substr, ',');
+                int res_test = stoi(substr);
+                result_test.push_back(res_test);
+
+            }
+            
+        }
+        for(int i = 0; i<=result_test.size()-1; i++){
+            ROS_INFO("Result: %d", result_test[i]);
+        }
     }
 
 private:
@@ -288,7 +311,6 @@ private:
         {
             uint32_t has_read;
             char buf[1024];
-            char error[1024];
             memset(buf, 0, sizeof(buf));
 
             ROS_INFO("tcp send cmd : %s", cmd);
