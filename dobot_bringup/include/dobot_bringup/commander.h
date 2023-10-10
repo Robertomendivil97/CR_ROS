@@ -275,7 +275,7 @@ public:
 
             std::stringstream ss;
             ss << buf_result;
-            //delete[] buf_result;
+            delete[] buf_result;
 
             while (ss.good()){
                 std::string substr;
