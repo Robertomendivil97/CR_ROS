@@ -5,5 +5,4 @@ int32 count
 string regs
 string type
 ---
-int32 cnt
 int32 res

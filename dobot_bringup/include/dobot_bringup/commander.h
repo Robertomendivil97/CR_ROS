@@ -243,8 +243,6 @@ public:
         if (str.find(send_cmd) == std::string::npos)
             throw std::logic_error(std::string("Invalid string : ") + str);
         
-        std::vector<std::uint32_t> result_test;
-
         std::size_t pos = str.find(',');
         if (pos == std::string::npos)
             throw std::logic_error(std::string("Has no ',' found : ") + str);
@@ -256,7 +254,6 @@ public:
         buf[pos] = 0;
         char* end;
         err = (int32_t)strtol(buf, &end, 10);
-        result.emplace_back(err);
 
         if (*end != '\0')
             throw std::logic_error(std::string("Invalid err id: ") + str);
