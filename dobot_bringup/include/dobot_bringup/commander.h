@@ -275,12 +275,13 @@ public:
 
             std::stringstream ss;
             ss << buf_result;
-            delete[] buf_result;
+            //delete[] buf_result;
 
             while (ss.good()){
                 std::string substr;
                 getline(ss, substr, ',');
                 int res_test = stoi(substr);
+                //ROS_INFO()
                 result.emplace_back(res_test);
 
             }

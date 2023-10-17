@@ -772,7 +772,7 @@ bool CR5Robot::getHoldRegs(dobot_bringup::GetHoldRegs::Request& request,
         if (result.empty())
             throw std::logic_error("Haven't recv any result");
 
-        if(result.size() != 1){
+        if(result.size() > 0){
             for(int i = 0; i<result.size(); i++){
                 response.regs.push_back(result[i]);
             }
