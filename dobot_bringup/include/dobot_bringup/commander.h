@@ -271,7 +271,7 @@ public:
         if(end_pos-1 != start_pos){
             char* buf_result = new char[str.length() + 1];
             str.copy(buf_result, end_pos - start_pos - 1, start_pos + 1);
-            buf_result[end_pos] = 0; 
+            buf_result[end_pos-1] = 0; 
 
             std::stringstream ss;
             ss << buf_result;

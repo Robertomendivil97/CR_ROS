@@ -860,7 +860,7 @@ bool CR5Robot::setHoldRegs(dobot_bringup::SetHoldRegs::Request& request,
     try
     {
         char cmd[200];
-        snprintf(cmd, sizeof(cmd), "SetHoldRegs(%d,%d,%d,%s,%s)", request.index, request.addr, request.count,
+        snprintf(cmd, sizeof(cmd), "SetHoldRegs(%d,%d,%d,{%s},%s)", request.index, request.addr, request.count,
                  request.regs.c_str(), request.type.c_str());
         commander_->dashboardDoCmd(cmd, response.res);
         return true;
